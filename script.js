@@ -2,6 +2,10 @@ const screen = document.getElementById('screen');
 const width = window.screen.width;
 const height = window.screen.height;
 
+const long = width > height ? width : height;
+const bottomBorder = Math.round(long * 0.0104) + 'px';
+const sideBorder = Math.round(long * 0.0026) + 'px';
+
 
 let sliders = {
 
@@ -50,7 +54,9 @@ let sliders = {
                                 --bgs: ${this.bg.s}%;
                                 --bds: ${this.bd.s}%;
                                 --bgl: ${this.bg.l}%;
-                                --bdl: ${this.bd.l}%`;
+                                --bdl: ${this.bd.l}%;
+                                --bott: ${bottomBorder};
+                                --side: ${sideBorder};`;
     }
 }
 
@@ -375,8 +381,10 @@ class Boid {
 
 }
 
+let ratio = Math.round(long / 6) < 300 ? Math.round(long / 6) : 300;
 
-let boids = Boid.flockGen(300);
+let boids = Boid.flockGen(ratio);
+console.log(boids.length);
 
 
 let vecMap;
